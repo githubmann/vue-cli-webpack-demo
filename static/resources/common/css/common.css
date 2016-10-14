@@ -1,0 +1,22 @@
+.shopping-cart{
+	/*postioning*/
+	position: fixed;
+	top: 60%;
+	right:0px;
+	/*box-model*/
+	/*Typography*/
+	/*visual*/
+	/*Misc*/
+}
+
+.badge{
+	/*postioning*/
+	position: fixed;
+	top: 58.5%;
+	right: 3px;
+	/*box-model*/
+	/*Typography*/
+	/*visual*/
+	background-color: #FF6600;
+	/*Misc*/
+}

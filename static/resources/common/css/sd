@@ -1,0 +1,35 @@
+  SELECT
+
+      dis_product.ID productId,
+            dis_product.`NAME` productName,
+            dis_product.PRICE productPrice,
+            dis_product.PICTURE productPicture,
+            dis_product.`STATUS` productStatus,
+            dis_product_type.ID typeId,
+            dis_product.REMARK productRemark,
+            dis_distributor.DIS_NAME distributorDisName,
+            dis_stock.STOCK_ID stockStockId
+      FROM
+      dis_product
+      LEFT JOIN dis_product_type ON dis_product.PRODCT_TYPE_ID = dis_product_type.ID
+      LEFT JOIN dis_stock ON dis_stock.PRODUCT_ID = dis_product.ID
+      LEFT JOIN dis_distributor ON dis_distributor.DIS_ID = dis_stock.DIS_ID
+      <where>
+        <if test="key!=null">
+          dis_product.NAME LIKE concat(concat('%',#{key}),'%')
+        </if>
+        <if test="productName!=null">
+          And dis_product.NAME  Like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="minSalePrice!=null">
+          And   #{minSalePrice} &lt; dis_product.PRICE
+        </if>
+        <if test="maxSalePrice!=null">
+          And dis_product.PRICE &gt; #{maxSalePrice}
+        </if>
+
+      </where>
+
+      ORDER BY
+      dis_product.UPDATE_TIME DESC
+      LIMIT #{currentPage},#{pageSize}
